@@ -7,7 +7,7 @@ stages:
 build_job:
   stage: build
   script:
-    - docker build -t node-app:latest
+    - sh docker build -t node-app:latest
   tags:
     - dev
 
