@@ -9,9 +9,8 @@
     "sanitizer": "^0.1.3"
   },
   "scripts": {
-    "start": "node app.js",
-    "test": "mocha --recursive --exit",
-    "sonar": "sonar-scanner"
+    "sonar-scanner": "node_modules/sonar-scanner/bin/sonar-scanner"
+
   },
   "author": "riaan@entersekt.com",
   "description": "Basic to do list exercise",
