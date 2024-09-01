@@ -17,13 +17,13 @@ sonarqube-check:
     entrypoint: [""]
   variables:
     SONAR_USER_HOME: "${CI_PROJECT_DIR}/.sonar"
-    GIT_DEPTH: "0"
+    GIT_DEPTH: "0"  # Fetch all branches
   cache:
     key: "${CI_JOB_NAME}"
     paths:
       - .sonar/cache
   script: 
-    - sonar-scanner -Dsonar.projectKey=your_project_key -Dsonar.sources=.
+    - sonar-scanner
   #allow_failure: true
   only:
     - master
