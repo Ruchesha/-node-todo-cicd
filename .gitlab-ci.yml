@@ -13,7 +13,7 @@ build_job:
 sonarqube-check:
   stage: test  # Adding the correct stage
   image: 
-    name: sonarsource/sonar-scanner-cli:latest
+    name: sonarsource/sonarqube:lts-community
     entrypoint: ["/bin/sh", "-c"]  # Use a shell to run the command
   variables:
     SONAR_USER_HOME: "${CI_PROJECT_DIR}/.sonar"
