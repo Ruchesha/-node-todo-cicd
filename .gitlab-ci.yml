@@ -1,7 +1,6 @@
 stages:
   - build
   - test
-  - push_to_dockerhub
   - deploy
 
 build_job:
@@ -28,13 +27,6 @@ sonarqube-check:
   allow_failure: true
   only:
     - main
-
-push_job:
-  stage: push_to_dockerhub
-  script:
-    - echo $DOCKERHUB_PASS | docker login -u $DOCKERHUB_USER --password-stdin
-    - docker image tag node-app:latest $DOCKERHUB_USER/node-app:latest
-    - docker push $DOCKERHUB_USER/node-app:latest
   tags:
     - dev
 
