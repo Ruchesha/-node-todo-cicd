@@ -12,16 +12,18 @@ build_job:
 
 sonarqube-check:
   stage: test
-  image: node-app:latest  # Ensure you are using a Node.js image
+  image: node:latest  # Use a Node.js image to run npm commands
   script:
-    # Set the package version
+    # Install dependencies if needed (ensure package.json is present)
+    - npm install
+    # Set the package version and add it to sonar-project.properties
     - PACKAGE_VERSION=$(node -p "require('./package.json').version")
-    - echo sonar.projectVersion=${PACKAGE_VERSION} >> sonar-project.properties
+    - echo "sonar.projectVersion=${PACKAGE_VERSION}" >> sonar-project.properties
 
     # Run the Sonar Scanner
-    - npm run sonar-scanner -- -Dsonar.projectKey=node-todo-app -Dsonar.sources=. -Dsonar.host.url=$SONAR_HOST_URL -Dsonar.login=$SONAR_LOGIN
+    - npx sonar-scanner -Dsonar.projectKey=node-todo-app -Dsonar.sources=. -Dsonar.host.url=$SONAR_HOST_URL -Dsonar.login=$SONAR_LOGIN
     
-  #allow_failure: true
+  # allow_failure: true  # Uncomment if you want this job to not fail the pipeline
   only:
     - master
   tags:
